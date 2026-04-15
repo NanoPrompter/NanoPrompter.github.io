@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Banana JSON Registry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+        .card { background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; }
+        code { background-color: rgba(110, 118, 129, 0.4); padding: 0.2rem 0.4rem; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; font-size: 85%; }
+        .copy-btn { cursor: pointer; transition: background 0.2s; }
+        .copy-btn:hover { background-color: #30363d; }
+        .accent { color: #3fb950; }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-10 border-b border-[#30363d] pb-6">
+            <h1 class="text-3xl font-semibold mb-2">🍌 Nano Banana Prompt Registry</h1>
+            <p class="text-[#8b949e]">A comprehensive collection of secret JSON prompts for Gemini 3 Flash Image / Nano Banana 2.</p>
+        </header>
+
+        <section class="grid gap-6">
+            <div class="card p-6">
+                <h2 class="text-xl font-medium mb-4 accent">Editor & Enhancement (DP)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-[#30363d]">
+                                <th class="pb-2 font-medium">Feature</th>
+                                <th class="pb-2 font-medium">JSON Config</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr><td class="py-3">Enhance DP</td><td><code>{"action": "enhance", "upscale": 2.0, "detail": "max"}</code></td></tr>
+                            <tr><td class="py-3">Object Eraser</td><td><code>{"edit": "remove", "target": "background", "fill": "auto"}</code></td></tr>
+                            <tr><td class="py-3">Neon Infusion</td><td><code>{"filter": "neon_green", "glow_strength": 0.8}</code></td></tr>
+                            <tr><td class="py-3">Sky Swap</td><td><code>{"replace": "sky", "with": "celestial_nebula"}</code></td></tr>
+                            <tr><td class="py-3">Face Refine</td><td><code>{"portrait": "upscale_face", "skin_texture": "natural"}</code></td></tr>
+                            <tr><td class="py-3">Lighting Rig</td><td><code>{"lighting": "volumetric", "source": "rim_light"}</code></td></tr>
+                            <tr><td class="py-3">Color Grade</td><td><code>{"lut": "cinematic_teal", "contrast": 1.2}</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <h2 class="text-xl font-medium mb-4 accent">Generation & Styles</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-[#30363d]">
+                                <th class="pb-2 font-medium">Style</th>
+                                <th class="pb-2 font-medium">JSON Config</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr><td class="py-3">Celestial Galaxy</td><td><code>{"theme": "galaxy", "palette": ["cyan", "lime"]}</code></td></tr>
+                            <tr><td class="py-3">Gametoon V3</td><td><code>{"style": "gametoon", "lines": "thick", "cell": true}</code></td></tr>
+                            <tr><td class="py-3">Holographic</td><td><code>{"material": "hologram", "opacity": 0.7, "glitch": 0.2}</code></td></tr>
+                            <tr><td class="py-3">Logo Vector</td><td><code>{"type": "vector", "flat": true, "bg": "transparent"}</code></td></tr>
+                            <tr><td class="py-3">Retro Synth</td><td><code>{"vibe": "80s_retro", "scanlines": "low", "chroma": 0.5}</code></td></tr>
+                            <tr><td class="py-3">Cyberpunk City</td><td><code>{"env": "metropolis", "rain": true, "neon": "green"}</code></td></tr>
+                            <tr><td class="py-3">Deep Space</td><td><code>{"subject": "supernova", "particles": "dense"}</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card p-6">
+                <h2 class="text-xl font-medium mb-4 accent">System Overrides</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-[#30363d]">
+                                <th class="pb-2 font-medium">Function</th>
+                                <th class="pb-2 font-medium">JSON Config</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr><td class="py-3">Strict No-Text</td><td><code>{"negative_prompt": "text, letters, words", "weight": 1}</code></td></tr>
+                            <tr><td class="py-3">Aspect Lock</td><td><code>{"aspect_ratio": "9:16", "resolution": "1080x1920"}</code></td></tr>
+                            <tr><td class="py-3">Seed Control</td><td><code>{"seed": 42069, "randomize": false}</code></td></tr>
+                            <tr><td class="py-3">Sampler Beta</td><td><code>{"sampler": "euler_a", "steps": 50, "cfg": 7.5}</code></td></tr>
+                            <tr><td class="py-3">Batch Render</td><td><code>{"batch": 4, "diversity_mode": "high"}</code></td></tr>
+                            <tr><td class="py-3">Raw Mode</td><td><code>{"processing": "raw", "no_post_process": true}</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-12 text-center text-sm text-[#8b949e]">
+            <p>Built for the Banana 2 ecosystem. Copy and paste into your configuration files.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('code').forEach(code => {
+            code.classList.add('copy-btn');
+            code.title = "Click to copy";
+            code.addEventListener('click', () => {
+                navigator.clipboard.writeText(code.innerText);
+                const original = code.style.color;
+                code.style.color = "#3fb950";
+                setTimeout(() => code.style.color = original, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
