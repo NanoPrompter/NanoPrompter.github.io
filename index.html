@@ -3,143 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nano Banana Prompt Registry</title>
+    <title>Nano Banana | Ultimate Prompt Registry</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap');
         
         :root {
-            --banana-yellow: #FFDE59;
-            --banana-soft: #FFF9E3;
+            --banana: #FFDE59;
+            --banana-dark: #E6C64D;
+            --bg-white: #FFFFFF;
         }
 
         body {
-            background-color: #FFFFFF;
-            color: #1A1A1A;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            background-color: var(--bg-white);
+            color: #0f172a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, var(--banana-yellow) 0%, #FFFFFF 100%);
-        }
-
-        .prompt-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-        }
-
-        .prompt-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--banana-yellow);
-            box-shadow: 0 20px 25px -5px rgba(255, 222, 89, 0.2);
-        }
-
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 222, 89, 0.3);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .copy-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #1A1A1A;
-            color: var(--banana-yellow);
-            padding: 12px 24px;
-            border-radius: 50px;
-            display: none;
-            z-index: 1000;
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--banana);
+            box-shadow: 0 30px 60px -12px rgba(255, 210, 0, 0.15);
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1e293b;
+            color: #e2e8f0;
         }
 
-        .floating-banana {
-            animation: float 4s ease-in-out infinite;
+        .banana-gradient {
+            background: linear-gradient(180deg, rgba(255,222,89,0.15) 0%, rgba(255,255,255,0) 100%);
         }
+
+        .copy-success {
+            animation: bounce 0.4s cubic-bezier(0.36, 0, 0.66, -0.56);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .nav-blur {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--banana); border-radius: 10px; }
     </style>
 </head>
-<body>
+<body class="banana-gradient min-h-screen">
 
-    <div id="copyToast" class="copy-toast font-bold shadow-2xl">
-        <i class="fas fa-check-circle mr-2"></i> Copied to Clipboard!
-    </div>
+    <nav class="sticky top-0 z-50 nav-blur border-b border-yellow-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-3xl">🍌</span>
+                <span class="text-xl font-800 tracking-tight italic">NANO<span class="text-yellow-500">BANANA</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-600 text-slate-600">
+                <a href="#" class="hover:text-yellow-600 transition-colors">Documentation</a>
+                <a href="#" class="hover:text-yellow-600 transition-colors">API Reference</a>
+                <a href="https://github.com" class="bg-slate-900 text-white px-5 py-2.5 rounded-full flex items-center gap-2 hover:bg-slate-800 transition-all">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.627-5.373-12-12-12"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <section class="hero-gradient min-h-[40vh] flex flex-col items-center justify-center text-center px-4 relative">
-        <div class="floating-banana text-6xl mb-4">🍌</div>
-        <h1 class="text-5xl md:text-7xl font-800 tracking-tighter mb-4">NANO <span class="text-yellow-500">BANANA</span></h1>
-        <p class="max-w-xl text-lg text-gray-600 font-medium">The ultimate JSON prompt registry for Gemini 3 Flash Image. Copy, paste, and generate.</p>
-    </section>
+    <header class="max-w-7xl mx-auto px-6 pt-24 pb-16 text-center">
+        <h1 class="text-6xl md:text-8xl font-800 tracking-tighter text-slate-900 mb-6">
+            Insane <span class="relative">Visuals<span class="absolute bottom-2 left-0 w-full h-3 bg-yellow-300 -z-10 rounded-full"></span></span> <br>by Secret JSON.
+        </h1>
+        <p class="text-slate-500 text-xl max-w-2xl mx-auto leading-relaxed">
+            Direct access to the hidden parameters of Gemini 3 Flash. Built for the high-performance creators using the Nano Banana 2 engine.
+        </p>
+    </header>
 
-    <main class="max-w-7xl mx-auto py-16 px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="promptGrid">
+    <main class="max-w-7xl mx-auto px-6 pb-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="promptGrid">
         </div>
     </main>
 
     <script>
         const prompts = [
-            { title: "Enhance DP", json: '{"action": "enhance", "upscale": 2.0, "detail_boost": "high"}', type: "Editor", desc: "Sharpen textures and upscale resolution instantly." },
-            { title: "Celestial Galaxy", json: '{"theme": "galaxy", "palette": ["neon_green", "purple"], "stars": "dense"}', type: "Visual", desc: "Deep space aesthetic with glowing nebulas." },
-            { title: "Object Eraser", json: '{"edit": "remove", "target": "background_elements", "mode": "smart_fill"}', type: "Editor", desc: "Cleanly remove unwanted objects from frames." },
-            { title: "Gametoon V3", json: '{"style": "gametoon", "outline": "bold", "shading": "cell"}', type: "Visual", desc: "Stylized character art optimized for avatars." },
-            { title: "Neon Infusion", json: '{"filter": "neon", "color": "#3fb950", "glow": 0.8}', type: "Visual", desc: "Adds a vibrant neon green glow to all edges." },
-            { title: "Cinematic Grade", json: '{"lighting": "volumetric", "contrast": 1.4, "color_temp": "warm"}', type: "Editor", desc: "High-end movie lighting and color balance." },
-            { title: "Logo Vector", json: '{"type": "vector", "bg": "transparent", "style": "minimalist"}', type: "System", desc: "Generate clean icons with no background." },
-            { title: "Sky Replace", json: '{"replace": "sky", "new_content": "aurora_borealis"}', type: "Editor", desc: "Instantly swap dull skies for dramatic events." },
-            { title: "Aspect Lock 9:16", json: '{"force_aspect": "9:16", "crop": "center_weight"}', type: "System", desc: "Perfect for TikTok and Reel dimensions." },
-            { title: "Retro Synth", json: '{"vibe": "80s_retro", "scanlines": 0.3, "chromatic": "low"}', type: "Visual", desc: "Classic VHS and retrowave aesthetic." },
-            { title: "Face Fix DP", json: '{"portrait": "enhance_features", "eyes": "sharp", "skin": "smooth"}', type: "Editor", desc: "Deep processing for realistic facial repair." },
-            { title: "Strict No-Text", json: '{"negative_prompt": "text, words, letters, signatures"}', type: "System", desc: "Forces the model to ignore character rendering." },
-            { title: "Hologram Effect", json: '{"material": "holographic", "glitch": 0.1, "opacity": 0.8}', type: "Visual", desc: "Transparent, shimmering sci-fi materials." },
-            { title: "Raw Render", json: '{"processing": "raw", "denoise": 0, "post_process": false}', type: "System", desc: "Zero AI smoothing, just pure pixel data." },
-            { title: "Anime Diffusion", json: '{"style": "anime_modern", "lighting": "soft", "lines": "thin"}', type: "Visual", desc: "Clean, modern Japanese animation style." },
-            { title: "Macro Focus", json: '{"camera": "macro", "bokeh": "max", "focus": "center"}', type: "Visual", desc: "Extremely shallow depth of field for detail." },
-            { title: "Watermark Hide", json: '{"mask": "bottom_right", "action": "inpainting_fill"}', type: "Editor", desc: "Intelligently hide corner logos or text." },
-            { title: "Texture Map", json: '{"render": "tileable", "axis": "both", "resolution": 2048}', type: "System", desc: "Create seamless textures for 3D modeling." },
-            { title: "Volumetric Fog", json: '{"env": "foggy", "density": 0.6, "light_shafts": true}', type: "Visual", desc: "Atmospheric depth and sun beams." },
-            { title: "Batch Variate", json: '{"batch": 4, "variation": 0.5, "seed_shift": "random"}', type: "System", desc: "Generate 4 distinct versions of one prompt." }
+            { id: 1, title: "Enhance DP Ultra", type: "Core", json: '{"action":"enhance","upscale":4.0,"noise_reduction":0.2,"sharpness":"extreme"}', color: "bg-blue-500" },
+            { id: 2, title: "Celestial Neon", type: "Style", json: '{"theme":"galaxy","nebula_density":0.9,"colors":["#00FF00","#8000FF"]}', color: "bg-purple-500" },
+            { id: 3, title: "Cinematic DP V2", type: "Editor", json: '{"lighting":"volumetric_shafts","exposure":1.2,"lense_flare":"anamorphic"}', color: "bg-amber-500" },
+            { id: 4, title: "Gametoon Legacy", type: "Style", json: '{"style":"gametoon_v3","line_weight":4,"render_engine":"cell_shaded"}', color: "bg-emerald-500" },
+            { id: 5, title: "Deep Face Repair", type: "Core", json: '{"portrait_fix":true,"eye_reflections":true,"skin_detail":"high_res"}', color: "bg-rose-500" },
+            { id: 6, title: "Holograph FX", type: "VFX", json: '{"material":"holographic_glass","scan_lines":true,"flicker_rate":0.05}', color: "bg-cyan-500" },
+            { id: 7, title: "Logo Vectorizer", type: "System", json: '{"output":"vector","svg_math":true,"flat_design":true,"no_shadows":true}', color: "bg-slate-800" },
+            { id: 8, title: "Ambient Fog DP", type: "Editor", json: '{"weather":"foggy","fog_color":"#ffffff","visibility_depth":150}', color: "bg-slate-400" },
+            { id: 9, title: "Anime Diffusion", type: "Style", json: '{"style":"modern_shonen","action_blur":true,"speed_lines":"radial"}', color: "bg-orange-500" },
+            { id: 10, title: "Strict No-Words", type: "System", json: '{"negative_prompt":"text,letters,numbers,typography,signs","quality":1}', color: "bg-red-600" },
+            { id: 11, title: "Cyberpunk Night", type: "Style", json: '{"env":"night_city","neon_intensity":1.5,"rain_drops":true}', color: "bg-indigo-600" },
+            { id: 12, title: "Macro Texture", type: "Core", json: '{"camera":"macro_lens","focus_point":"center","depth_scale":0.95}', color: "bg-teal-600" },
+            { id: 13, title: "Magic Hour", type: "Lighting", json: '{"time":"golden_hour","sun_position":15,"warmth_scale":1.8}', color: "bg-orange-300" },
+            { id: 14, title: "Sky Replacement", type: "Editor", json: '{"edit":"replace_sky","new_layer":"blood_moon_apocalypse","blend":0.8}', color: "bg-red-800" },
+            { id: 15, title: "Vaporwave Retro", type: "Style", json: '{"aesthetic":"vaporwave","grid_floor":true,"retro_sun":true}', color: "bg-pink-400" },
+            { id: 16, title: "Studio Portrait", type: "Core", json: '{"lighting":"three_point","bg_color":"#111111","rim_light":true}', color: "bg-zinc-700" },
+            { id: 17, title: "Underwater FX", type: "VFX", json: '{"env":"underwater","caustics":true,"bubble_density":"low"}', color: "bg-blue-400" },
+            { id: 18, title: "Isometric Grid", type: "System", json: '{"perspective":"isometric","angle":45,"grid_alignment":true}', color: "bg-violet-400" },
+            { id: 19, title: "Sketch Mode", type: "Style", json: '{"render":"pencil_sketch","paper_texture":"rough","lead_softness":0.6}', color: "bg-stone-500" },
+            { id: 20, title: "Batch Seed Sync", type: "System", json: '{"batch_count":4,"sync_seeds":true,"variation_per_step":0.1}', color: "bg-yellow-600" }
         ];
 
         const grid = document.getElementById('promptGrid');
 
-        prompts.forEach((p, index) => {
+        prompts.forEach(p => {
             const card = document.createElement('div');
-            card.className = "prompt-card bg-white p-6 rounded-3xl border-2 border-gray-100 flex flex-col";
+            card.className = "glass-card p-8 rounded-[32px] flex flex-col gap-6";
             card.innerHTML = `
-                <div class="flex justify-between items-start mb-4">
-                    <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">${p.type}</span>
-                    <button onclick="copyPrompt('${p.json}')" class="text-gray-400 hover:text-yellow-500 transition-colors">
-                        <i class="far fa-copy text-xl"></i>
-                    </button>
-                </div>
-                <h3 class="text-xl font-800 mb-2">${p.title}</h3>
-                <p class="text-gray-500 text-sm mb-6 flex-grow">${p.desc}</p>
-                <div class="bg-gray-50 rounded-2xl p-4 relative group cursor-pointer overflow-hidden border border-gray-100">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-[10px] font-bold text-gray-400 uppercase">JSON Preview</span>
-                        <span class="text-[10px] text-green-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full ${p.color}"></div>
+                        <span class="text-xs font-800 tracking-widest text-slate-400 uppercase">${p.type}</span>
                     </div>
-                    <code class="text-xs text-gray-700 break-all font-mono leading-relaxed block">${p.json}</code>
-                    <div class="absolute inset-0 bg-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity" onclick="copyPrompt('${p.json}')"></div>
+                    <div class="flex gap-2">
+                         <button onclick="copyRaw('${p.json}', this)" class="p-3 bg-white border border-slate-100 rounded-2xl hover:bg-yellow-50 hover:border-yellow-200 transition-all active:scale-95 group shadow-sm">
+                            <svg class="w-5 h-5 text-slate-600 group-hover:text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-800 text-slate-900 mb-2">${p.title}</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Configures the Banana-2 engine to prioritize ${p.title.toLowerCase()} parameters during synthesis.</p>
+                </div>
+
+                <div class="relative group">
+                    <div class="code-block p-5 rounded-2xl overflow-x-auto text-sm border border-slate-700 shadow-inner">
+                        <code class="whitespace-nowrap">${p.json}</code>
+                    </div>
+                    <div class="absolute inset-0 bg-yellow-400/0 group-hover:bg-yellow-400/5 transition-all rounded-2xl cursor-pointer" onclick="copyRaw('${p.json}', this)"></div>
+                </div>
+
+                <div class="flex items-center gap-4 mt-auto">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold">⚡</div>
+                        <div class="w-8 h-8 rounded-full border-2 border-white bg-yellow-400 flex items-center justify-center text-[10px] font-bold">DP</div>
+                    </div>
+                    <span class="text-[10px] font-800 text-slate-400 uppercase tracking-tighter">Compatible with Gemini 3 Flash Image v2.1</span>
                 </div>
             `;
             grid.appendChild(card);
         });
 
-        function copyPrompt(text) {
+        function copyRaw(text, btn) {
             navigator.clipboard.writeText(text);
-            const toast = document.getElementById('copyToast');
-            toast.style.display = 'block';
+            
+            // Visual Feedback
+            const svg = btn.querySelector('svg');
+            const originalPath = svg.innerHTML;
+            
+            btn.classList.add('copy-success', 'bg-yellow-400', 'border-yellow-400');
+            svg.classList.replace('text-slate-600', 'text-white');
+            svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+            
             setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2000);
+                btn.classList.remove('copy-success', 'bg-yellow-400', 'border-yellow-400');
+                svg.classList.replace('text-white', 'text-slate-600');
+                svg.innerHTML = originalPath;
+            }, 1500);
         }
     </script>
 </body>
