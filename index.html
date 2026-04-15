@@ -3,110 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nano Banana JSON Registry</title>
+    <title>Nano Banana Prompt Registry</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-        .card { background-color: #161b22; border: 1px solid #30363d; border-radius: 6px; }
-        code { background-color: rgba(110, 118, 129, 0.4); padding: 0.2rem 0.4rem; border-radius: 6px; font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace; font-size: 85%; }
-        .copy-btn { cursor: pointer; transition: background 0.2s; }
-        .copy-btn:hover { background-color: #30363d; }
-        .accent { color: #3fb950; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        :root {
+            --banana-yellow: #FFDE59;
+            --banana-soft: #FFF9E3;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--banana-yellow) 0%, #FFFFFF 100%);
+        }
+
+        .prompt-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--banana-yellow);
+            box-shadow: 0 20px 25px -5px rgba(255, 222, 89, 0.2);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 222, 89, 0.3);
+        }
+
+        .copy-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1A1A1A;
+            color: var(--banana-yellow);
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: none;
+            z-index: 1000;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating-banana {
+            animation: float 4s ease-in-out infinite;
+        }
     </style>
 </head>
-<body class="p-4 md:p-12">
-    <div class="max-w-4xl mx-auto">
-        <header class="mb-10 border-b border-[#30363d] pb-6">
-            <h1 class="text-3xl font-semibold mb-2">🍌 Nano Banana Prompt Registry</h1>
-            <p class="text-[#8b949e]">A comprehensive collection of secret JSON prompts for Gemini 3 Flash Image / Nano Banana 2.</p>
-        </header>
+<body>
 
-        <section class="grid gap-6">
-            <div class="card p-6">
-                <h2 class="text-xl font-medium mb-4 accent">Editor & Enhancement (DP)</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b border-[#30363d]">
-                                <th class="pb-2 font-medium">Feature</th>
-                                <th class="pb-2 font-medium">JSON Config</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm">
-                            <tr><td class="py-3">Enhance DP</td><td><code>{"action": "enhance", "upscale": 2.0, "detail": "max"}</code></td></tr>
-                            <tr><td class="py-3">Object Eraser</td><td><code>{"edit": "remove", "target": "background", "fill": "auto"}</code></td></tr>
-                            <tr><td class="py-3">Neon Infusion</td><td><code>{"filter": "neon_green", "glow_strength": 0.8}</code></td></tr>
-                            <tr><td class="py-3">Sky Swap</td><td><code>{"replace": "sky", "with": "celestial_nebula"}</code></td></tr>
-                            <tr><td class="py-3">Face Refine</td><td><code>{"portrait": "upscale_face", "skin_texture": "natural"}</code></td></tr>
-                            <tr><td class="py-3">Lighting Rig</td><td><code>{"lighting": "volumetric", "source": "rim_light"}</code></td></tr>
-                            <tr><td class="py-3">Color Grade</td><td><code>{"lut": "cinematic_teal", "contrast": 1.2}</code></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card p-6">
-                <h2 class="text-xl font-medium mb-4 accent">Generation & Styles</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b border-[#30363d]">
-                                <th class="pb-2 font-medium">Style</th>
-                                <th class="pb-2 font-medium">JSON Config</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm">
-                            <tr><td class="py-3">Celestial Galaxy</td><td><code>{"theme": "galaxy", "palette": ["cyan", "lime"]}</code></td></tr>
-                            <tr><td class="py-3">Gametoon V3</td><td><code>{"style": "gametoon", "lines": "thick", "cell": true}</code></td></tr>
-                            <tr><td class="py-3">Holographic</td><td><code>{"material": "hologram", "opacity": 0.7, "glitch": 0.2}</code></td></tr>
-                            <tr><td class="py-3">Logo Vector</td><td><code>{"type": "vector", "flat": true, "bg": "transparent"}</code></td></tr>
-                            <tr><td class="py-3">Retro Synth</td><td><code>{"vibe": "80s_retro", "scanlines": "low", "chroma": 0.5}</code></td></tr>
-                            <tr><td class="py-3">Cyberpunk City</td><td><code>{"env": "metropolis", "rain": true, "neon": "green"}</code></td></tr>
-                            <tr><td class="py-3">Deep Space</td><td><code>{"subject": "supernova", "particles": "dense"}</code></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card p-6">
-                <h2 class="text-xl font-medium mb-4 accent">System Overrides</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b border-[#30363d]">
-                                <th class="pb-2 font-medium">Function</th>
-                                <th class="pb-2 font-medium">JSON Config</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm">
-                            <tr><td class="py-3">Strict No-Text</td><td><code>{"negative_prompt": "text, letters, words", "weight": 1}</code></td></tr>
-                            <tr><td class="py-3">Aspect Lock</td><td><code>{"aspect_ratio": "9:16", "resolution": "1080x1920"}</code></td></tr>
-                            <tr><td class="py-3">Seed Control</td><td><code>{"seed": 42069, "randomize": false}</code></td></tr>
-                            <tr><td class="py-3">Sampler Beta</td><td><code>{"sampler": "euler_a", "steps": 50, "cfg": 7.5}</code></td></tr>
-                            <tr><td class="py-3">Batch Render</td><td><code>{"batch": 4, "diversity_mode": "high"}</code></td></tr>
-                            <tr><td class="py-3">Raw Mode</td><td><code>{"processing": "raw", "no_post_process": true}</code></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <footer class="mt-12 text-center text-sm text-[#8b949e]">
-            <p>Built for the Banana 2 ecosystem. Copy and paste into your configuration files.</p>
-        </footer>
+    <div id="copyToast" class="copy-toast font-bold shadow-2xl">
+        <i class="fas fa-check-circle mr-2"></i> Copied to Clipboard!
     </div>
 
+    <section class="hero-gradient min-h-[40vh] flex flex-col items-center justify-center text-center px-4 relative">
+        <div class="floating-banana text-6xl mb-4">🍌</div>
+        <h1 class="text-5xl md:text-7xl font-800 tracking-tighter mb-4">NANO <span class="text-yellow-500">BANANA</span></h1>
+        <p class="max-w-xl text-lg text-gray-600 font-medium">The ultimate JSON prompt registry for Gemini 3 Flash Image. Copy, paste, and generate.</p>
+    </section>
+
+    <main class="max-w-7xl mx-auto py-16 px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="promptGrid">
+        </div>
+    </main>
+
     <script>
-        document.querySelectorAll('code').forEach(code => {
-            code.classList.add('copy-btn');
-            code.title = "Click to copy";
-            code.addEventListener('click', () => {
-                navigator.clipboard.writeText(code.innerText);
-                const original = code.style.color;
-                code.style.color = "#3fb950";
-                setTimeout(() => code.style.color = original, 1000);
-            });
+        const prompts = [
+            { title: "Enhance DP", json: '{"action": "enhance", "upscale": 2.0, "detail_boost": "high"}', type: "Editor", desc: "Sharpen textures and upscale resolution instantly." },
+            { title: "Celestial Galaxy", json: '{"theme": "galaxy", "palette": ["neon_green", "purple"], "stars": "dense"}', type: "Visual", desc: "Deep space aesthetic with glowing nebulas." },
+            { title: "Object Eraser", json: '{"edit": "remove", "target": "background_elements", "mode": "smart_fill"}', type: "Editor", desc: "Cleanly remove unwanted objects from frames." },
+            { title: "Gametoon V3", json: '{"style": "gametoon", "outline": "bold", "shading": "cell"}', type: "Visual", desc: "Stylized character art optimized for avatars." },
+            { title: "Neon Infusion", json: '{"filter": "neon", "color": "#3fb950", "glow": 0.8}', type: "Visual", desc: "Adds a vibrant neon green glow to all edges." },
+            { title: "Cinematic Grade", json: '{"lighting": "volumetric", "contrast": 1.4, "color_temp": "warm"}', type: "Editor", desc: "High-end movie lighting and color balance." },
+            { title: "Logo Vector", json: '{"type": "vector", "bg": "transparent", "style": "minimalist"}', type: "System", desc: "Generate clean icons with no background." },
+            { title: "Sky Replace", json: '{"replace": "sky", "new_content": "aurora_borealis"}', type: "Editor", desc: "Instantly swap dull skies for dramatic events." },
+            { title: "Aspect Lock 9:16", json: '{"force_aspect": "9:16", "crop": "center_weight"}', type: "System", desc: "Perfect for TikTok and Reel dimensions." },
+            { title: "Retro Synth", json: '{"vibe": "80s_retro", "scanlines": 0.3, "chromatic": "low"}', type: "Visual", desc: "Classic VHS and retrowave aesthetic." },
+            { title: "Face Fix DP", json: '{"portrait": "enhance_features", "eyes": "sharp", "skin": "smooth"}', type: "Editor", desc: "Deep processing for realistic facial repair." },
+            { title: "Strict No-Text", json: '{"negative_prompt": "text, words, letters, signatures"}', type: "System", desc: "Forces the model to ignore character rendering." },
+            { title: "Hologram Effect", json: '{"material": "holographic", "glitch": 0.1, "opacity": 0.8}', type: "Visual", desc: "Transparent, shimmering sci-fi materials." },
+            { title: "Raw Render", json: '{"processing": "raw", "denoise": 0, "post_process": false}', type: "System", desc: "Zero AI smoothing, just pure pixel data." },
+            { title: "Anime Diffusion", json: '{"style": "anime_modern", "lighting": "soft", "lines": "thin"}', type: "Visual", desc: "Clean, modern Japanese animation style." },
+            { title: "Macro Focus", json: '{"camera": "macro", "bokeh": "max", "focus": "center"}', type: "Visual", desc: "Extremely shallow depth of field for detail." },
+            { title: "Watermark Hide", json: '{"mask": "bottom_right", "action": "inpainting_fill"}', type: "Editor", desc: "Intelligently hide corner logos or text." },
+            { title: "Texture Map", json: '{"render": "tileable", "axis": "both", "resolution": 2048}', type: "System", desc: "Create seamless textures for 3D modeling." },
+            { title: "Volumetric Fog", json: '{"env": "foggy", "density": 0.6, "light_shafts": true}', type: "Visual", desc: "Atmospheric depth and sun beams." },
+            { title: "Batch Variate", json: '{"batch": 4, "variation": 0.5, "seed_shift": "random"}', type: "System", desc: "Generate 4 distinct versions of one prompt." }
+        ];
+
+        const grid = document.getElementById('promptGrid');
+
+        prompts.forEach((p, index) => {
+            const card = document.createElement('div');
+            card.className = "prompt-card bg-white p-6 rounded-3xl border-2 border-gray-100 flex flex-col";
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                    <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">${p.type}</span>
+                    <button onclick="copyPrompt('${p.json}')" class="text-gray-400 hover:text-yellow-500 transition-colors">
+                        <i class="far fa-copy text-xl"></i>
+                    </button>
+                </div>
+                <h3 class="text-xl font-800 mb-2">${p.title}</h3>
+                <p class="text-gray-500 text-sm mb-6 flex-grow">${p.desc}</p>
+                <div class="bg-gray-50 rounded-2xl p-4 relative group cursor-pointer overflow-hidden border border-gray-100">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">JSON Preview</span>
+                        <span class="text-[10px] text-green-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
+                    </div>
+                    <code class="text-xs text-gray-700 break-all font-mono leading-relaxed block">${p.json}</code>
+                    <div class="absolute inset-0 bg-yellow-400/10 opacity-0 group-hover:opacity-100 transition-opacity" onclick="copyPrompt('${p.json}')"></div>
+                </div>
+            `;
+            grid.appendChild(card);
         });
+
+        function copyPrompt(text) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('copyToast');
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
+        }
     </script>
 </body>
 </html>
